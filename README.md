@@ -35,20 +35,15 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 ## Como Usar
 
-1. **Login, Esqueceu a senha e Cadastro**:  
-   Ao abrir o aplicativo, faça login com suas credenciais ou crie uma nova conta caso seja a primeira vez que está usando o app. Caso tenhe uma conta e esqueceu a senha da para redefinir a senha.
+1. **Login, Esqueceu a senha e Cadastro**:  Ao abrir o aplicativo, faça login com suas credenciais ou crie uma nova conta caso seja a primeira vez que está usando o app. Caso tenhe uma conta e esqueceu a senha da para redefinir a senha.
 
-2. **Dashboard**:  
-   Após o login, você será levado à dashboard, onde pode ver todas as senhas que cadastrou. Cada senha estará organizada permitindo a busca por nome.
+2. **Dashboard**:   Após o login, você será levado à dashboard, onde pode ver todas as senhas que cadastrou. Cada senha estará organizada permitindo a busca por nome.
 
-3. **Adicionar Nova Senha**:  
-   Na dashboard, selecione o botão de "Adicionar" para cadastrar uma nova senha. Insira o nome do serviço, o login, a senha.
+3. **Adicionar Nova Senha**:   Na dashboard, selecione o botão de "Adicionar" para cadastrar uma nova senha. Insira o nome do serviço, o login, a senha.
 
-4. **Editar Senha**:
-   Dentre a lista de senhas cadastrados o usuario pode optar por fazer alguma edição.
+4. **Editar Senha**:   Dentre a lista de senhas cadastrados o usuario pode optar por fazer alguma edição.
 
-6. **Tela Perfil**:
-   Na tela de perfil o usuario pode ver seu Nome, Usuario e Email cadastrado.
+6. **Tela Perfil**:   Na tela de perfil o usuario pode ver seu Nome, Usuario e Email cadastrado.
 
 ## Licença
 
