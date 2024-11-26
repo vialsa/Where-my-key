@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, ViewStyle } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from './styles';
 
@@ -7,22 +7,23 @@ interface ButtonProps {
   text: string;
   type?: 'primary' | 'secondary' | 'danger';
   onPress?: () => void;
+  style?: ViewStyle; // Adiciona suporte à prop `style`
 }
 
-export default function Button({ text, type = 'primary', onPress }: ButtonProps) {
+export default function Button({ text, type = 'primary', onPress, style }: ButtonProps) {
   const isPrimary = type === 'primary';
   return (
-    <TouchableOpacity style={[styles.button, styles[type]]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, styles[type], style]} onPress={onPress}>
       {isPrimary ? (
         <LinearGradient
           colors={['#61C92A', '#32746D']}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
-          style={styles.gradient}
+          style={[styles.gradient, style]} // Aplica estilo adicional no gradiente também, se necessário
         >
           <Text style={styles.buttonText}>{text}</Text>
         </LinearGradient>
-    ) : (
+      ) : (
         <Text style={styles.buttonText}>{text}</Text>
       )}
     </TouchableOpacity>

@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     bottom: 130,
+    position: 'absolute',
+    top: 100
   },
 });
 

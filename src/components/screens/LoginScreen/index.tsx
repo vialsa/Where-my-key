@@ -4,10 +4,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Input from '../../inputs/input';
 import Button from '../../buttons/button';
 import Title from '../../titles/title';
+import Checkbox from 'expo-checkbox';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
 
 export default function LoginScreen() {
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <LinearGradient
@@ -16,9 +18,18 @@ export default function LoginScreen() {
     end={{ x: 0, y: 1 }}
     style={stylesGlobal.container}>
       <Title title="Where's my key?" />
+      <Text style={styles.subtitleRegister}>Login</Text>
       <Input placeholder="User" />
       <Input placeholder="Senha" secureTextEntry />
-      <Button text="Login" type="primary" onPress={() => {}} />  
+      <View style={styles.checkboxContainer}>
+        <Checkbox
+          value={isChecked} // O estado do checkbox
+          onValueChange={setIsChecked} // Função para alterar o estado
+          color={isChecked ? '#32746D' : undefined} // Define a cor quando marcado
+        />
+        <Text style={styles.checkboxText}>Manter-me conectado</Text>
+      </View>
+      <Button text="Login" type="primary" onPress={() => {}} style={{marginTop: 100}}/>  
       <TouchableOpacity>
         <Text style={styles.forgotPassword}>Esqueci a senha</Text>
       </TouchableOpacity>

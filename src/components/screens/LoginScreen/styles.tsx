@@ -9,6 +9,7 @@ subtitle: {
 subtitleRegister: {
   fontSize: 22,
   fontWeight: 'bold',
+  marginTop: 200,
   marginBottom: 50,
 },
 forgotPassword: {
@@ -20,6 +21,18 @@ register: {
   color: '#333',
   marginTop: 15,
   textDecorationLine: 'underline',
-}
+},
+checkboxContainer: {
+  backgroundColor: 'transparent',
+  borderWidth: 0, // Remove borda padrão
+  padding: 0,
+  marginVertical: 10,
+  flexDirection: 'row',
+},
+checkboxText: {
+  color: '#333', // Cor do texto
+  fontSize: 16,
+  marginLeft: 8,
+},
 
 });

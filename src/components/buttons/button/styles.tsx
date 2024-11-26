@@ -17,7 +17,7 @@ export default StyleSheet.create({
     width: '100%',
   },
   primary: {
-    top: 110,
+    
   },
   secondary: {
     backgroundColor: 'gray',

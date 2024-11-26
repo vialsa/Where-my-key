@@ -14,13 +14,13 @@ export default function RegisterScreen() {
     start={{ x: 0, y: 0 }}
     end={{ x: 0, y: 1 }}
     style={stylesGlobal.container}>
-        <Title title="Where's my key?" />
+        <Title title="Where's my key?"/>
         <Text style={styles.subtitleRegister}>Cadastrar</Text>
         <Input placeholder="User" />
         <Input placeholder="Senha" secureTextEntry />
         <Input placeholder="Confirmar Senha" secureTextEntry />
         <Input placeholder="Nome Completo" secureTextEntry />
-        <Button text="Cadastrar" type="primary" onPress={() => {}} />
+        <Button text="Cadastrar" type="primary" onPress={() => {}} style={{top: 60}}  />
     </LinearGradient>
   );
 };

@@ -20,6 +20,5 @@ register: {
   color: '#333',
   marginTop: 15,
   textDecorationLine: 'underline',
-}
-
+},
 });
