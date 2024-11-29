@@ -22,6 +22,8 @@ Where's My Keys? foi desenvolvido para a matéria de desenvolvimento mobile, foc
 
 ## Tecnologias Utilizadas
 - **React Native com Expo**: Para o desenvolvimento de interface e funcionalidades mobile.
+- **React Navigation**: Navegação entre telas.
+- **Expo Secure Store**: Armazenamento seguro de senhas.
 - **JavaScript**: Para a lógica do aplicativo.
 - **AsyncStorage**: Para o armazenamento local de dados
 - **Figma**: Para o design e prototipação das interfaces.
