@@ -36,7 +36,7 @@ export default function LoginScreen() {
       <TouchableOpacity>
         <Text style={styles.register}>Cadastrar</Text>
       </TouchableOpacity>
-      </LinearGradient>
+    </LinearGradient>
   );
 };
 
