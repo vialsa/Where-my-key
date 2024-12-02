@@ -18,7 +18,7 @@ export default function LoginScreen() {
     end={{ x: 0, y: 1 }}
     style={stylesGlobal.container}>
       <Title title="Where's my key?" />
-      <Text style={styles.subtitleRegister}>Login</Text>
+      <Text style={styles.subtitle}>Login</Text>
       <Input placeholder="User" />
       <Input placeholder="Senha" secureTextEntry />
       <View style={styles.checkboxContainer}>
