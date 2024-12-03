@@ -7,7 +7,7 @@ export default StyleSheet.create({
         borderRadius: 25,
         marginRight: 10,
       },
-      menu: {
+      menuImage: {
         width: 50,
         height: 50,
       },
@@ -41,10 +41,31 @@ export default StyleSheet.create({
       list: {
         flex: 1,
         position: 'absolute',
-        top: 260,
+        top: 370,
       },
       item: {
         fontSize: 16,
         marginBottom: 10,
       },
+      searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFFE5',
+        borderRadius: 25,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        marginBottom: 20,
+        width: 350,
+        position: 'absolute',
+        top: 260,    
+      },
+      searchInput: {
+        flex: 1,
+        marginRight: 10,
+      },
+      seachImage: {
+        width: 50,
+        height: 50,
+      }
+
 });

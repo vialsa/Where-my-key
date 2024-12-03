@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, TextInput} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Input from '../../inputs/input';
 import Button from '../../buttons/button';
@@ -28,19 +28,34 @@ export default function HomeScreen() {
             <TouchableOpacity>
                 <Image
                 source={require('../../../../assets/img/menu.png')}
-                style={styles.menu}
+                style={styles.menuImage}
                 />
             </TouchableOpacity>
         </View>
 
         <Text style={styles.subtitle}> Minhas Chaves </Text> 
 
+        <View style={styles.searchContainer}>
+            <TextInput
+                placeholder="Buscar"
+                style={styles.searchInput}
+            />
+            <TouchableOpacity>
+                <Image
+                    source={require('../../../../assets/img/seach.png')}
+                    style={styles.seachImage}
+                />
+            </TouchableOpacity>
+        </View>
+
         <FlatList
-        data={items}
-        renderItem={({ item }) => <Text style={styles.item}>• {item}</Text>}
-        keyExtractor={(item, index) => index.toString()}
-        style={styles.list}
+            data={items}
+            keyExtractor={(item, index) => index.toString()}
+            style={styles.list}
+            renderItem={({ item }) => <Text style={styles.item}>• {item}</Text>}
         />
+
+        <Button text="Adicionar" type="primary" onPress={() => {}} style={{top: 180}}  />
 
     </LinearGradient>
   );
