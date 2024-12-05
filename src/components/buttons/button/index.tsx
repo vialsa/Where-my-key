@@ -1,11 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Text, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, ViewStyle, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from './styles';
 
 interface ButtonProps {
   text: string;
-  type?: 'primary' | 'secondary' | 'danger';
+  type?: 'primary' | 'secondary' | 'danger' | 'warning';
   onPress?: () => void;
   style?: ViewStyle; // Adiciona suporte à prop `style`
 }

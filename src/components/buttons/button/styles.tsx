@@ -25,6 +25,9 @@ export default StyleSheet.create({
   danger: {
     backgroundColor: '#EF232A',
   },
+  warning: {
+    backgroundColor: '#FFAE03',
+  },
   buttonText: {
     color: 'black',
     fontSize: 16,
