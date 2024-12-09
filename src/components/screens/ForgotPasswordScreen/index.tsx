@@ -19,7 +19,7 @@ export default function ForgotPasswordScreen() {
       <Input placeholder="User" />
       <Input placeholder="Senha" secureTextEntry />
       <Input placeholder="Confirmar Senha" secureTextEntry />
-      <Button text="Alterar" type="primary" onPress={() => {}} />
+      <Button text="Alterar" type="primary" onPress={() => {}} style={{marginTop: 50}}/>
       <Button text="Cancelar" type="danger" onPress={() => {}} />
     </LinearGradient>
   );

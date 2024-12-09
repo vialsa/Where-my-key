@@ -50,6 +50,7 @@ export default function LoginScreen() {
       end={{ x: 0, y: 1 }}
       style={stylesGlobal.container}>
       <Title title="Where's my key?" />
+
       <Text style={styles.subtitleRegister}>Login</Text>
 
       {/* Input para o email */}
@@ -66,6 +67,7 @@ export default function LoginScreen() {
         value={password}
         onChangeText={setPassword} // Atualiza o estado com o valor digitado
       />
+
 
       <View style={styles.checkboxContainer}>
         <Checkbox

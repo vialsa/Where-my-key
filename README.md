@@ -22,8 +22,9 @@ Where's My Keys? foi desenvolvido para a matéria de desenvolvimento mobile, foc
 
 ## Tecnologias Utilizadas
 - **React Native com Expo**: Para o desenvolvimento de interface e funcionalidades mobile.
+- **React Navigation**: Navegação entre telas.
+- **Expo Secure Store**: Armazenamento seguro de senhas.
 - **JavaScript**: Para a lógica do aplicativo.
-- **Firebase** (ou outra opção que você estiver usando): Para autenticação e armazenamento de dados.
 - **AsyncStorage**: Para o armazenamento local de dados
 - **Figma**: Para o design e prototipação das interfaces.
 
@@ -51,4 +52,6 @@ Para rodar o projeto localmente, siga os passos abaixo:
 Este projeto está licenciado sob a Licença MIT. Isso significa que você pode usar, copiar, modificar, mesclar, publicar, distribuir e sublicenciar o software, desde que mantenha o aviso de copyright original.
 
 Consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
+https://www.figma.com/design/T5uLaacnlewiLAyBy1qEaF/Where's-my-key?node-id=7-96&node-type=frame&t=N1G3iWfzckavIWR5-0
 
