@@ -8,6 +8,7 @@ import Checkbox from 'expo-checkbox';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
 import { isValidEmail, isStrongPassword, isNotEmpty } from '../../../validators/validador';
+import * as SecureStore from 'expo-secure-store';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState(''); // Estado para o email
@@ -51,7 +52,7 @@ export default function LoginScreen() {
       style={stylesGlobal.container}>
       <Title title="Where's my key?" />
 
-      <Text style={styles.subtitleRegister}>Login</Text>
+      <Text style={styles.subtitle}>Login</Text>
 
       {/* Input para o email */}
       <Input

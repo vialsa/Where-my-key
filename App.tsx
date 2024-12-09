@@ -7,6 +7,6 @@ import ProfileScreen from './src/components/screens/ProfileScreen'
 import ModalKeyScreen from './src/components/screens/ModalKeyEditScreen';
 
 export default function App() {
-  return <ModalKeyScreen />;
+  return <HomeScreen />;
 }
 
