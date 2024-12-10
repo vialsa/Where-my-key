@@ -1,33 +1,73 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-subtitle: {
-  fontSize: 22,
-  fontWeight: 'bold',
-  marginTop: 200,
-  marginBottom: 50,
-},
-forgotPassword: {
-  color: '#333',
-  marginTop: 10,
-  textDecorationLine: 'underline',
-},
-register: {
-  color: '#333',
-  marginTop: 15,
-  textDecorationLine: 'underline',
-},
-checkboxContainer: {
-  backgroundColor: 'transparent',
-  borderWidth: 0, // Remove borda padrão
-  padding: 0,
-  marginVertical: 10,
-  flexDirection: 'row',
-},
-checkboxText: {
-  color: '#333', // Cor do texto
-  fontSize: 16,
-  marginLeft: 8,
-},
-
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 50,
+    color: '#333',
+  },
+  input: {
+    width: '80%',
+    height: 50,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 25,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#CCC',
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 25,
+    width: '80%',
+    padding: 15,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  link: {
+    color: '#007AFF',
+    fontSize: 14,
+    textDecorationLine: 'underline',
+  },
+  subtitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 200,
+    marginBottom: 50,
+    color: '#333',
+  },
+  forgotPassword: {
+    color: '#007AFF',
+    marginTop: 10,
+    textDecorationLine: 'underline',
+  },
+  register: {
+    color: '#007AFF',
+    marginTop: 15,
+    textDecorationLine: 'underline',
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10,
+    backgroundColor: 'transparent',
+  },
+  checkboxText: {
+    color: '#333',
+    fontSize: 16,
+    marginLeft: 8,
+  },
 });
