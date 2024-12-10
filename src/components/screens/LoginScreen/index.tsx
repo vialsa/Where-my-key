@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,12 +8,31 @@ import Input from '../../inputs/input';
 import Button from '../../buttons/button';
 import Title from '../../titles/title';
 import Checkbox from 'expo-checkbox';
+import { useAuth } from '../../../context/authContext';
+import LoginSchema from '../../../validators/login';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
 
 export default function LoginScreen() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+
+  const { login } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handleLogin = async () => {
+    try {
+      // Validação usando o schema do Yup
+      await LoginSchema.validate({ username, password, keepConnected: isChecked });
+
+      // Chamar a função de login do AuthContext
+      await login({ username, password, keepConnected: isChecked });
+      navigation.navigate('HomeScreen');
+    } catch (error: any) {
+      Alert.alert('Erro', error.message || 'Não foi possível fazer login.');
+    }
+  };
 
   return (
     <LinearGradient
@@ -24,8 +43,8 @@ export default function LoginScreen() {
     >
       <Title title="Where's my key?" />
       <Text style={styles.subtitle}>Login</Text>
-      <Input placeholder="User" />
-      <Input placeholder="Senha" secureTextEntry />
+      <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
+      <Input placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry />
       <View style={styles.checkboxContainer}>
         <Checkbox
           value={isChecked}
@@ -37,7 +56,7 @@ export default function LoginScreen() {
       <Button
         text="Login"
         type="primary"
-        onPress={() => navigation.navigate('HomeScreen')}
+        onPress={handleLogin}
         style={{ marginTop: 100 }}
       />
       <TouchableOpacity onPress={() => navigation.navigate('ForgotPasswordScreen')}>

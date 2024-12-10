@@ -1,6 +1,12 @@
 import React from 'react';
-import AppNavigation from './src/navigation/AppNavigation'; // Importação do AppNavigation
+import { AuthProvider } from './src/context/authContext';
+import AppNavigation from './src/navigation/AppNavigation';
 
 export default function App() {
-  return <AppNavigation />; // Renderiza o sistema de navegação
+  console.log('App rendered'); // Debugging log
+  return (
+    <AuthProvider>
+      <AppNavigation />
+    </AuthProvider>
+  );
 }
