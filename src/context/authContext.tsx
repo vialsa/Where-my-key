@@ -11,9 +11,9 @@ interface User {
 interface AuthContextData {
   user: User | null;
   isAuthenticated: boolean;
-  login: (credentials: { username: string; password: string; keepConnected: boolean }) => Promise<void>;
-  register: (name: string, username: string, password: string) => Promise<void>;
-  forgotPassword: (username: string, newPassword: string) => Promise<void>;
+  login: (credentials: { username: string; password: string; keepConnected: boolean }) => Promise<boolean>;
+  register: (name: string, username: string, password: string) => Promise<boolean>;
+  forgotPassword: (username: string, newPassword: string) => Promise<boolean>;
   logout: () => Promise<void>;
 }
 
@@ -23,55 +23,52 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = async ({ username, password, keepConnected }: { username: string; password: string; keepConnected: boolean }) => {
+  const login = async ({ username, password, keepConnected }: { username: string; password: string; keepConnected: boolean }): Promise<boolean> => {
     try {
       const userStored = await AsyncStorage.getItem('@safekey-user');
       if (userStored) {
         const storedUser: User = JSON.parse(userStored);
 
-        // Verificar se username e password correspondem aos salvos
         if (storedUser.username === username && storedUser.password === password) {
           setUser(storedUser);
           setIsAuthenticated(true);
 
-          // Manter o usuário conectado se o checkbox estiver marcado
           if (keepConnected) {
             await AsyncStorage.setItem('@safekey-keepConnected', 'true');
           }
+          return true;
         } else {
-          throw new Error('Usuário ou senha inválidos.');
+          Alert.alert('Erro', 'Usuário ou senha inválidos.');
         }
       } else {
-        throw new Error('Nenhum usuário registrado.');
+        Alert.alert('Erro', 'Nenhum usuário registrado.');
       }
-    } catch (error: any) {
-      Alert.alert('Erro no Login', error.message || 'Não foi possível fazer login.');
+    } catch (error) {
+      Alert.alert('Erro no Login', 'Não foi possível realizar o login.');
     }
+    return false;
   };
 
-  const register = async (name: string, username: string, password: string) => {
+  const register = async (name: string, username: string, password: string): Promise<boolean> => {
     try {
       const newUser: User = { name, username, password };
-
-      // Salvar o usuário no AsyncStorage
       await AsyncStorage.setItem('@safekey-user', JSON.stringify(newUser));
-      Alert.alert('Cadastro', 'Usuário cadastrado com sucesso!');
+      return true;
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível cadastrar. Tente novamente mais tarde.');
     }
+    return false;
   };
 
-  const forgotPassword = async (username: string, newPassword: string) => {
+  const forgotPassword = async (username: string, newPassword: string): Promise<boolean> => {
     try {
       const userStored = await AsyncStorage.getItem('@safekey-user');
       if (userStored) {
         const user: User = JSON.parse(userStored);
-
-        // Verificar se o username fornecido existe
         if (user.username === username) {
           user.password = newPassword;
           await AsyncStorage.setItem('@safekey-user', JSON.stringify(user));
-          Alert.alert('Recuperação de Senha', 'Senha alterada com sucesso.');
+          return true;
         } else {
           Alert.alert('Erro', 'Usuário não encontrado.');
         }
@@ -81,6 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível alterar a senha.');
     }
+    return false;
   };
 
   const logout = async () => {

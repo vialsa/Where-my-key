@@ -23,12 +23,12 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     try {
-      // Validação usando o schema do Yup
       await LoginSchema.validate({ username, password, keepConnected: isChecked });
 
-      // Chamar a função de login do AuthContext
-      await login({ username, password, keepConnected: isChecked });
-      navigation.navigate('HomeScreen');
+      const success = await login({ username, password, keepConnected: isChecked });
+      if (success) {
+        navigation.navigate('HomeScreen');
+      }
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Não foi possível fazer login.');
     }
