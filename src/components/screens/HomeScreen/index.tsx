@@ -58,7 +58,7 @@ export default function HomeScreen() {
         style={styles.list}
         contentContainerStyle={{ paddingBottom: 80 }}
       />
-      <Button text="Adicionar" type="primary" onPress={() => {}}   />
+      <Button text="Adicionar" type="primary" onPress={() => navigation.navigate('AddKeyScreen')}   />
     </LinearGradient>
   );
 }

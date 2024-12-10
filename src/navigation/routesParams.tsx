@@ -9,5 +9,6 @@ export type RootStackParamList = {
     ModalKeyEditScreen: Keys; // Permitir que a rota aceite parâmetros do tipo Keys
     ProfileScreen: undefined;
     RegisterScreen: undefined;
+    AddKeyScreen: undefined;
   };
   

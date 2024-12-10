@@ -8,6 +8,7 @@ import ForgotPasswordScreen from '../components/screens/ForgotPasswordScreen';
 import RegisterScreen from '../components/screens/RegisterScreen'
 import ProfileScreen from '../components/screens/ProfileScreen'
 import ModalKeyEditScreen from '../components/screens/ModalKeyEditScreen'
+import AddKeyScreen from '../components/screens/AddKeyScreen'
 import { RootStackParamList } from './routesParams';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -44,6 +45,11 @@ export default function AppNavigation() {
         <Stack.Screen 
           name="RegisterScreen" 
           component={RegisterScreen} 
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen 
+          name="AddKeyScreen" 
+          component={AddKeyScreen} 
           options={{ headerShown: true }}
         />
       </Stack.Navigator>
