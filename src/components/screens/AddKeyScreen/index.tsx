@@ -27,7 +27,7 @@ export default function ModalKeyScreen() {
         <Input placeholder="Senha" secureTextEntry />
         <View style={styles.buttonsArea}>
           <Button text="Voltar" type="secondary" onPress={() => navigation.navigate('HomeScreen')} style={{ top: 50, marginRight: 20 }}  />
-          <Button text="Adicionar" type="warning" onPress={() => {}} style={{top: 50, marginLeft: 20}}  />
+          <Button text="Adicionar" type="primary" onPress={() => {}} style={{top: 50, marginLeft: 20}}  />
         </View>
     </LinearGradient>
   );
