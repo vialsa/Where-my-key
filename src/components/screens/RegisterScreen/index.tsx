@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, KeyboardAvoidingView,Platform,ScrollView,TouchableWithoutFeedback,Keyboard, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -37,18 +37,31 @@ export default function RegisterScreen() {
   };
 
   return (
-    <LinearGradient
-      colors={['#A8F9FF', '#659599']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
-      style={stylesGlobal.container}
+    <KeyboardAvoidingView
+    style={{ flex: 1 }}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <Title title="Where's my key?" />
-      <Text style={styles.subtitle}>Cadastrar</Text>
-      <Input placeholder="Nome" value={name} onChangeText={setName} />
-      <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
-      <Input placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry />
-      <Button text="Cadastrar" type="primary" onPress={handleRegister} style={{ marginTop: 50 }} />
-    </LinearGradient>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <LinearGradient
+            colors={['#A8F9FF', '#659599']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={stylesGlobal.container}
+          >
+            <Title title="Where's my key?" />
+            <Text style={styles.subtitle}>Cadastrar</Text>
+            <Input placeholder="Nome" value={name} onChangeText={setName} />
+            <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
+            <Input placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry />
+            <Button text="Cadastrar" type="primary" onPress={handleRegister} style={{ marginTop: 50 }} />
+            <Button text="Cancelar" type="danger" onPress={() => navigation.navigate('LoginScreen')} style={{ marginTop: 10 }} />
+          </LinearGradient>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }

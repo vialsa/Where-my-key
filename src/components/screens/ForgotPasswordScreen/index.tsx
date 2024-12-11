@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, KeyboardAvoidingView,Platform,ScrollView,TouchableWithoutFeedback,Keyboard,} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -42,19 +42,31 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <LinearGradient
-      colors={['#A8F9FF', '#659599']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
-      style={stylesGlobal.container}
+    <KeyboardAvoidingView
+    style={{ flex: 1 }}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <Title title="Where's my key?" />
-      <Text style={styles.subtitle}>Alterar Senha</Text>
-      <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
-      <Input placeholder="Nova Senha" value={newPassword} onChangeText={setNewPassword} secureTextEntry />
-      <Input placeholder="Confirmar Nova Senha" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
-      <Button text="Alterar" type="primary" onPress={handleForgotPassword} style={{ marginTop: 50 }} />
-      <Button text="Cancelar" type="danger" onPress={() => navigation.navigate('LoginScreen')} style={{ marginTop: 10 }} />
-    </LinearGradient>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <LinearGradient
+            colors={['#A8F9FF', '#659599']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={stylesGlobal.container}
+          >
+            <Title title="Where's my key?" />
+            <Text style={styles.subtitle}>Alterar Senha</Text>
+            <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
+            <Input placeholder="Nova Senha" value={newPassword} onChangeText={setNewPassword} secureTextEntry />
+            <Input placeholder="Confirmar Nova Senha" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+            <Button text="Alterar" type="primary" onPress={handleForgotPassword} style={{ marginTop: 50 }} />
+            <Button text="Cancelar" type="danger" onPress={() => navigation.navigate('LoginScreen')} style={{ marginTop: 10 }} />
+          </LinearGradient>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }

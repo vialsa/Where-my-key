@@ -8,7 +8,6 @@ import Input from '../../inputs/input';
 import Button from '../../buttons/button';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
-import Title from '../../titles/title';
 
 export default function ModalKeyScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();

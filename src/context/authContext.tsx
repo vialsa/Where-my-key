@@ -40,8 +40,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           Alert.alert('Erro', 'Usuário ou senha inválidos.');
         }
-      } else {
-        Alert.alert('Erro', 'Nenhum usuário registrado.');
       }
     } catch (error) {
       Alert.alert('Erro no Login', 'Não foi possível realizar o login.');
@@ -72,8 +70,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           Alert.alert('Erro', 'Usuário não encontrado.');
         }
-      } else {
-        Alert.alert('Erro', 'Nenhum usuário registrado.');
       }
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível alterar a senha.');
