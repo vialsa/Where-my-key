@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/routesParams';
 import Input from '../../inputs/input';
 import Button from '../../buttons/button';
-import stylesGlobal from '../../styles/global';
-import styles from './styles';
 import Title from '../../titles/title';
 import { useAuth } from '../../../context/authContext';
+import stylesGlobal from '../../styles/global';
+import styles from './styles';
 
 export default function RegisterScreen() {
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
   const { register } = useAuth();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleRegister = async () => {
-    if (password !== confirmPassword) {
-      Alert.alert('Erro', 'As senhas não coincidem.');
+    if (!name || !username || !password) {
+      Alert.alert('Erro', 'Todos os campos são obrigatórios.');
       return;
     }
 
     try {
-      await register('Novo Usuário', username, password);
-      Alert.alert('Cadastro', 'Usuário cadastrado com sucesso!');
+      const success = await register(name, username, password);
+      if (success) {
+        Alert.alert('Sucesso', 'Cadastro realizado com sucesso!');
+        navigation.navigate('LoginScreen');
+      }
     } catch (error: any) {
-      Alert.alert('Erro', error.message || 'Não foi possível cadastrar.');
+      Alert.alert('Erro', error.message || 'Não foi possível realizar o cadastro.');
     }
   };
 
@@ -38,9 +45,9 @@ export default function RegisterScreen() {
     >
       <Title title="Where's my key?" />
       <Text style={styles.subtitle}>Cadastrar</Text>
+      <Input placeholder="Nome" value={name} onChangeText={setName} />
       <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
       <Input placeholder="Senha" value={password} onChangeText={setPassword} secureTextEntry />
-      <Input placeholder="Confirmar Senha" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
       <Button text="Cadastrar" type="primary" onPress={handleRegister} style={{ marginTop: 50 }} />
     </LinearGradient>
   );

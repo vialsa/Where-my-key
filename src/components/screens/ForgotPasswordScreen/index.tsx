@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/routesParams';
 import Input from '../../inputs/input';
 import Button from '../../buttons/button';
 import stylesGlobal from '../../styles/global';
@@ -14,16 +17,25 @@ export default function ForgotPasswordScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const { forgotPassword } = useAuth();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleForgotPassword = async () => {
+    if (!username || !newPassword || !confirmPassword) {
+      Alert.alert('Erro', 'Todos os campos são obrigatórios.');
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       Alert.alert('Erro', 'As senhas não coincidem.');
       return;
     }
 
     try {
-      await forgotPassword(username, newPassword);
-      Alert.alert('Recuperação de Senha', 'Senha alterada com sucesso!');
+      const success = await forgotPassword(username, newPassword);
+      if (success) {
+        Alert.alert('Sucesso', 'Senha alterada com sucesso!');
+        navigation.navigate('LoginScreen');
+      }
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Não foi possível alterar a senha.');
     }
@@ -42,7 +54,7 @@ export default function ForgotPasswordScreen() {
       <Input placeholder="Nova Senha" value={newPassword} onChangeText={setNewPassword} secureTextEntry />
       <Input placeholder="Confirmar Nova Senha" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
       <Button text="Alterar" type="primary" onPress={handleForgotPassword} style={{ marginTop: 50 }} />
-      <Button text="Cancelar" type="danger" onPress={() => {}} />
+      <Button text="Cancelar" type="danger" onPress={() => navigation.navigate('LoginScreen')} style={{ marginTop: 10 }} />
     </LinearGradient>
   );
 }
