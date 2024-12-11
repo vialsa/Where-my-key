@@ -50,12 +50,12 @@ export default StyleSheet.create({
     color: '#333',
   },
   forgotPassword: {
-    color: '#007AFF',
+    color: '#00008b',
     marginTop: 10,
     textDecorationLine: 'underline',
   },
   register: {
-    color: '#007AFF',
+    color: '#00008b',
     marginTop: 15,
     textDecorationLine: 'underline',
   },
