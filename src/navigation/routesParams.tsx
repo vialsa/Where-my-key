@@ -1,6 +1,4 @@
-import { Profile } from '../mock/profile';
 import { Keys } from '../mock/keys';
-
 
 export type RootStackParamList = {
     HomeScreen: undefined;
