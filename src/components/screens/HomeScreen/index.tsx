@@ -9,12 +9,14 @@ import Button from '../../buttons/button';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../../../context/authContext'; // Importa o contexto de autenticação
 
 export default function HomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [keys, setKeys] = useState<any[]>([]); // Estado para armazenar as chaves
   const [searchText, setSearchText] = useState(''); // Estado para o texto de busca
   const [filteredKeys, setFilteredKeys] = useState<any[]>([]); // Estado para armazenar as chaves filtradas
+  const { user } = useAuth(); // Obtém o usuário logado do contexto
 
   // Função para carregar as chaves do AsyncStorage
   const loadKeys = async () => {
@@ -72,7 +74,10 @@ export default function HomeScreen() {
           source={require('../../../../assets/img/cara.png')}
           style={styles.avatar}
         />
-        <Text style={styles.cabecalhoText}>Fulano de Tal</Text>
+        {/* Exibe o nome do usuário logado */}
+        <Text style={styles.cabecalhoText}>
+          {user?.name || 'Usuário não identificado'}
+        </Text>
         <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
           <Image
             source={require('../../../../assets/img/menu.png')}
