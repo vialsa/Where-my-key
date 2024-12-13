@@ -8,7 +8,7 @@ export const isValidEmail = (email: string): boolean => {
 // valida a senha 
 export const isStrongPassword = (password: string): boolean => {
   
-  const passwordRegex = /^\d{8,}$/; {/*^:Começo,\d:qualquer dígito(de 0 a 9),{8,}:"pelo menos 8 caracteres",($):"Fim" */}
+  const passwordRegex = /^\d$/; {/*^:Começo,\d:qualquer dígito(de 0 a 9),{8,}:"pelo menos 8 caracteres",($):"Fim" */}
   // Testa a senha com a expressão regular e retorna verdadeiro se for forte o suficiente
   return passwordRegex.test(password);
 };
