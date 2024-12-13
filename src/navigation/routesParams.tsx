@@ -1,6 +1,13 @@
+import { Keys } from '../mock/keys';
+
 export type RootStackParamList = {
-    Login: undefined;  // Tela de login 
-    Home: undefined;   // Tela home
-    Register: undefined; // Tela RegisterScreen
+    HomeScreen: undefined;
+    LoginScreen: undefined;
+    ForgotPasswordScreen: undefined;
+    ModalKeyEditScreen: Keys; // Permitir que a rota aceite parâmetros do tipo Keys
+    ProfileScreen: undefined;
+    RegisterScreen: undefined;
+    AddKeyScreen: undefined;
+
   };
   

@@ -1,21 +1,59 @@
-// AppNavigator.tsx
+
 import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { RootStackParamList } from './routesParams'; // Certifique-se de importar o tipo de rotas
-import LoginScreen from '../components/screens/LoginScreen';
+
 import HomeScreen from '../components/screens/HomeScreen';
-import RegisterScreen from '../components/screens/RegisterScreen';
+import LoginScreen from '../components/screens/LoginScreen';
+import ForgotPasswordScreen from '../components/screens/ForgotPasswordScreen';
+import RegisterScreen from '../components/screens/RegisterScreen'
+import ProfileScreen from '../components/screens/ProfileScreen'
+import ModalKeyEditScreen from '../components/screens/ModalKeyEditScreen'
+import AddKeyScreen from '../components/screens/AddKeyScreen'
+import { RootStackParamList } from './routesParams';
 
-const Stack = createStackNavigator<RootStackParamList>(); // Passando o tipo para o Stack
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function AppNavigator() {
+export default function AppNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="LoginScreen">
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="ForgotPasswordScreen"
+          component={ForgotPasswordScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen 
+          name="ProfileScreen" 
+          component={ProfileScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen 
+          name="ModalKeyEditScreen" 
+          component={ModalKeyEditScreen}
+          options={{ presentation: 'modal', headerShown: true }} // Define como modal
+        />
+        <Stack.Screen 
+          name="RegisterScreen" 
+          component={RegisterScreen} 
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen 
+          name="AddKeyScreen" 
+          component={AddKeyScreen} 
+          options={{ headerShown: true }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
