@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -12,7 +12,18 @@ import { useAuth } from '../../../context/authContext';
 
 export default function ProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { user } = useAuth(); // Obtém o usuário logado do contexto de autenticação
+  const { user, editUser } = useAuth(); // Obtém o usuário logado e a função de edição do contexto
+  const [name, setName] = useState(user?.name || '');
+  const [username, setUsername] = useState(user?.username || '');
+
+  const handleEdit = async () => {
+    const success = await editUser({ name, username });
+    if (success) {
+      Alert.alert('Sucesso', 'Dados editados com sucesso!');
+    } else {
+      Alert.alert('Erro', 'Não foi possível editar os dados.');
+    }
+  };
 
   return (
     <LinearGradient
@@ -26,13 +37,13 @@ export default function ProfileScreen() {
         style={styles.avatar}
       />
 
-      <Text style={styles.subtitle}>{user?.name || 'Nome não disponível'}</Text>
+      <Text style={styles.subtitle}>Editar Perfil</Text>
 
       <Text style={styles.label}>Nome:</Text>
-      <Input placeholder="Nome" value={user?.name || ''} editable={false} />
+      <Input placeholder="Nome" value={name} onChangeText={setName} />
 
       <Text style={styles.label}>Usuário:</Text>
-      <Input placeholder="Usuário" value={user?.username || ''} editable={false} />
+      <Input placeholder="Usuário" value={username} onChangeText={setUsername} />
 
       <View style={styles.buttonsArea}>
         <Button
@@ -44,7 +55,7 @@ export default function ProfileScreen() {
         <Button
           text="Editar"
           type="warning"
-          onPress={() => {}}
+          onPress={handleEdit}
           style={{ top: 50, marginLeft: 20 }}
         />
       </View>

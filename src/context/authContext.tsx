@@ -14,6 +14,7 @@ interface AuthContextData {
   login: (credentials: { username: string; password: string; keepConnected: boolean }) => Promise<boolean>;
   register: (name: string, username: string, password: string) => Promise<boolean>;
   forgotPassword: (username: string, newPassword: string) => Promise<boolean>;
+  editUser: (updatedUser: Partial<User>) => Promise<boolean>;
   logout: () => Promise<void>;
 }
 
@@ -77,6 +78,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
+  const editUser = async (updatedUser: Partial<User>): Promise<boolean> => {
+    try {
+      const userStored = await AsyncStorage.getItem('@safekey-user');
+      if (userStored) {
+        const currentUser: User = JSON.parse(userStored);
+        const newUser = { ...currentUser, ...updatedUser }; // Atualiza apenas os campos modificados
+        await AsyncStorage.setItem('@safekey-user', JSON.stringify(newUser));
+        setUser(newUser); // Atualiza o estado local
+        return true;
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível editar os dados do usuário.');
+    }
+    return false;
+  };
+
   const logout = async () => {
     setUser(null);
     setIsAuthenticated(false);
@@ -84,7 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, register, forgotPassword, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, register, forgotPassword, editUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
