@@ -40,4 +40,8 @@ export default StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#E0E0E0',
   },
+  deleteButton: {
+    padding: 10,
+    marginLeft: 10,
+  },
 });

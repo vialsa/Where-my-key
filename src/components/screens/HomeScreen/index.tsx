@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, FlatList, TextInput, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,10 +8,39 @@ import Card from '../../cards/card';
 import Button from '../../buttons/button';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
-import { keys } from '../../../mock/keys';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [keys, setKeys] = useState<any[]>([]); // Estado para armazenar as chaves
+
+  // Função para carregar as chaves do AsyncStorage
+  const loadKeys = async () => {
+    try {
+      const keysString = await AsyncStorage.getItem('@safekey-keys'); // Recupera as chaves
+      if (keysString) {
+        setKeys(JSON.parse(keysString)); // Converte de volta para um array de objetos
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível carregar as chaves.');
+    }
+  };
+
+  // Função para excluir uma chave
+  const deleteKey = async (id: string) => {
+    try {
+      const updatedKeys = keys.filter((key) => key.id !== id); // Filtra a chave a ser excluída
+      await AsyncStorage.setItem('@safekey-keys', JSON.stringify(updatedKeys)); // Atualiza o AsyncStorage
+      setKeys(updatedKeys); // Atualiza o estado
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível excluir a chave.');
+    }
+  };
+
+  // Carregar as chaves ao montar o componente
+  useEffect(() => {
+    loadKeys();
+  }, []);
 
   return (
     <LinearGradient
@@ -53,12 +82,12 @@ export default function HomeScreen() {
         data={keys}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
-          return <Card data={item} />;
+          return <Card data={item} onDelete={deleteKey} />; // Passa a função deleteKey para o Card
         }}
         style={styles.list}
         contentContainerStyle={{ paddingBottom: 80 }}
       />
-      <Button text="Adicionar" type="primary" onPress={() => navigation.navigate('AddKeyScreen')}   />
+      <Button text="Adicionar" type="primary" onPress={() => navigation.navigate('AddKeyScreen')} />
     </LinearGradient>
   );
 }

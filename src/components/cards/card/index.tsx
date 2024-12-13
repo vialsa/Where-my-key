@@ -1,7 +1,6 @@
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import styles from "./styles";
-import global from "../../styles/global";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,9 +14,10 @@ type Keys = {
 
 type CardProps = {
   data: Keys;
+  onDelete: (id: string) => void;  // Função para excluir a chave
 };
 
-export default function Card({ data }: CardProps) {
+export default function Card({ data, onDelete }: CardProps) {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
@@ -32,6 +32,12 @@ export default function Card({ data }: CardProps) {
           onPress={() => navigation.navigate("ModalKeyEditScreen", data)}
         >
           <FontAwesome name="edit" size={24} color="black" />
+        </Pressable>
+        <Pressable
+          style={styles.deleteButton}  // Novo botão de excluir
+          onPress={() => onDelete(data.id)}  // Chama a função onDelete ao clicar
+        >
+          <FontAwesome name="trash" size={24} color="red" />
         </Pressable>
       </View>
     </View>
