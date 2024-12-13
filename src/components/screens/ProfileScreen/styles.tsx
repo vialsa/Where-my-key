@@ -26,5 +26,13 @@ buttonsArea:{
   flexDirection: 'row',
   width: 300,
   justifyContent: 'center'
-}
+},
+label: {
+  fontSize: 16, 
+  fontWeight: '600', 
+  color: '#000000', 
+  marginBottom: 8, 
+  marginTop: 16, 
+  marginRight: 250,
+},
 });
