@@ -8,10 +8,13 @@ import Card from '../../cards/card';
 import Button from '../../buttons/button';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
+
 import { keys } from '../../../mock/keys';
 
 export default function HomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+
 
   return (
     <LinearGradient
@@ -36,10 +39,12 @@ export default function HomeScreen() {
 
       <Text style={styles.subtitle}>Minhas Chaves</Text>
 
+
       <View style={styles.searchContainer}>
         <TextInput
           placeholder="Buscar"
           style={styles.searchInput}
+
         />
         <TouchableOpacity>
           <Image

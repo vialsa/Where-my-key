@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import {View,Text,Alert,KeyboardAvoidingView,Platform,ScrollView,TouchableWithoutFeedback,Keyboard,} from 'react-native';
+
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -11,8 +13,16 @@ import Checkbox from 'expo-checkbox';
 import { useAuth } from '../../../context/authContext';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
+import { isValidEmail, isStrongPassword, isNotEmpty } from '../../../validators/validador';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../navigation/routesParams';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 export default function LoginScreen() {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
@@ -28,10 +38,12 @@ export default function LoginScreen() {
       }
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Não foi possível fazer login.');
+
     }
   };
 
   return (
+
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -80,5 +92,6 @@ export default function LoginScreen() {
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
+
   );
 }

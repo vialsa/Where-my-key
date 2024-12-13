@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import { View, Text, Alert, KeyboardAvoidingView,Platform,ScrollView,TouchableWithoutFeedback,Keyboard, } from 'react-native';
+
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -64,4 +66,5 @@ export default function RegisterScreen() {
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
+
 }

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { TextInput, TextInputProps } from 'react-native';
 import styles from './styles';
 
-export default function Input(props: TextInputProps) {
-  return <TextInput style={styles.input} {...props} />;
-}
+// Usando forwardRef para que o componente possa ser referenciado pelo react-hook-form
+const Input = forwardRef<TextInput, TextInputProps>((props, ref) => {
+  return <TextInput ref={ref} style={styles.input} {...props} />;
+});
+
+export default Input;
+
+
