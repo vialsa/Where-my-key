@@ -8,40 +8,32 @@ import Checkbox from 'expo-checkbox';
 import stylesGlobal from '../../styles/global';
 import styles from './styles';
 import { isValidEmail, isStrongPassword, isNotEmpty } from '../../../validators/validador';
-import * as SecureStore from 'expo-secure-store';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../navigation/routesParams';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 export default function LoginScreen() {
   const [email, setEmail] = useState(''); // Estado para o email
   const [password, setPassword] = useState(''); // Estado para a senha
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleLogin = () => {
-    // Validação dos campos
-    if (!isNotEmpty(email)) {
-      Alert.alert('Erro', 'O campo de email está vazio.');
-      return;
-    }
+  const navigation = useNavigation<LoginScreenNavigationProp>(); 
 
-    if (!isValidEmail(email)) {
-      Alert.alert('Erro', 'Por favor, insira um email válido.');
-      return;
+  const handleLogin = async () => {
+    try {
+      const storedUser = await AsyncStorage.getItem(username);
+      if (storedUser) {
+        const userObj = JSON.parse(storedUser);
+        if (userObj.password === password) {
+          Alert.alert('Sucesso', 'Login bem-sucedido!');
+          navigation.navigate('Home'); // Redireciona para a tela principal
+        } }
+    } catch (e) {
+      Alert.alert('Erro', 'Erro ao tentar fazer login.');
     }
-
-    if (!isNotEmpty(password)) {
-      Alert.alert('Erro', 'O campo de senha está vazio.');
-      return;
-    }
-
-    if (!isStrongPassword(password)) {
-      Alert.alert(
-        'Erro',
-        'A senha deve conter pelo menos 8 caracteres, incluindo números e letras.'
-      );
-      return;
-    }
-
-    // Caso passe pelas validações
-    Alert.alert('Sucesso', 'Login realizado com sucesso!');
   };
 
   return (
@@ -69,7 +61,6 @@ export default function LoginScreen() {
         onChangeText={setPassword} // Atualiza o estado com o valor digitado
       />
 
-
       <View style={styles.checkboxContainer}>
         <Checkbox
           value={isChecked}
@@ -94,6 +85,4 @@ export default function LoginScreen() {
       </TouchableOpacity>
     </LinearGradient>
   );
-};
-
-
+}
