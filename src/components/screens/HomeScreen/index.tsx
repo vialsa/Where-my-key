@@ -13,13 +13,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function HomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [keys, setKeys] = useState<any[]>([]); // Estado para armazenar as chaves
+  const [searchText, setSearchText] = useState(''); // Estado para o texto de busca
+  const [filteredKeys, setFilteredKeys] = useState<any[]>([]); // Estado para armazenar as chaves filtradas
 
   // Função para carregar as chaves do AsyncStorage
   const loadKeys = async () => {
     try {
       const keysString = await AsyncStorage.getItem('@safekey-keys'); // Recupera as chaves
       if (keysString) {
-        setKeys(JSON.parse(keysString)); // Converte de volta para um array de objetos
+        const parsedKeys = JSON.parse(keysString);
+        setKeys(parsedKeys); // Define as chaves no estado
+        setFilteredKeys(parsedKeys); // Inicializa a lista filtrada com todas as chaves
       }
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível carregar as chaves.');
@@ -31,9 +35,23 @@ export default function HomeScreen() {
     try {
       const updatedKeys = keys.filter((key) => key.id !== id); // Filtra a chave a ser excluída
       await AsyncStorage.setItem('@safekey-keys', JSON.stringify(updatedKeys)); // Atualiza o AsyncStorage
-      setKeys(updatedKeys); // Atualiza o estado
+      setKeys(updatedKeys); // Atualiza o estado original
+      setFilteredKeys(updatedKeys); // Atualiza o estado filtrado
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível excluir a chave.');
+    }
+  };
+
+  // Função para filtrar as chaves com base no texto de busca
+  const handleSearch = (text: string) => {
+    setSearchText(text); // Atualiza o texto de busca
+    if (text === '') {
+      setFilteredKeys(keys); // Mostra todas as chaves se a busca estiver vazia
+    } else {
+      const filtered = keys.filter((key) =>
+        key.user.toLowerCase().includes(text.toLowerCase()) // Filtra pelo campo "user"
+      );
+      setFilteredKeys(filtered); // Atualiza as chaves filtradas
     }
   };
 
@@ -69,8 +87,10 @@ export default function HomeScreen() {
         <TextInput
           placeholder="Buscar"
           style={styles.searchInput}
+          value={searchText}
+          onChangeText={handleSearch} // Chama a função de busca ao digitar
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleSearch(searchText)}>
           <Image
             source={require('../../../../assets/img/seach.png')}
             style={styles.seachImage}
@@ -79,7 +99,7 @@ export default function HomeScreen() {
       </View>
 
       <FlatList
-        data={keys}
+        data={filteredKeys} // Usa a lista filtrada
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return <Card data={item} onDelete={deleteKey} />; // Passa a função deleteKey para o Card
